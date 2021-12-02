@@ -1,59 +1,61 @@
 package PanoViewer;
 
-import javax.swing.*;
+import java.awt.Window;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 
 /**
- *
- * @author Rohan Babbar
  * Look and Feel Class
+ * @author Rohan Babbar
  */
-
 public class LookFeel {
 
-  private UIManager.LookAndFeelInfo currentLook;
+  private LookAndFeelInfo currentLook;
   private static LookFeel instance = new LookFeel();
 
   /**
    * Sets the look and feel to Metal and caches the first LaF returned by UIManager.
    */
   private LookFeel() {
-      currentLook = getAllLookAndFeel()[0];
+    currentLook = getAllLookAndFeel()[0];
   }
 
   /**
    * Get All the look and feels
+   *
    * @return all the LookAndFeels
    */
-  public UIManager.LookAndFeelInfo[] getAllLookAndFeel() {
+  public LookAndFeelInfo[] getAllLookAndFeel() {
     return UIManager.getInstalledLookAndFeels();
   }
 
   /**
    * Get Current LAF
+   *
    * @return the current LAF
    */
-  public UIManager.LookAndFeelInfo getCurrentLook() {
+  public LookAndFeelInfo getCurrentLook() {
     return currentLook;
   }
 
   /**
    * Set Current LAF to LAF returned by the UIManager
-   * @param  currentLook The look and feel Info
+   *
+   * @param currentLook The look and feel Info
    */
-  public void setCurrentLook(UIManager.LookAndFeelInfo currentLook) {
+  public void setCurrentLook(LookAndFeelInfo currentLook) {
     try {
       UIManager.setLookAndFeel(currentLook.getClassName());
       this.currentLook = currentLook;
-    }catch (Exception e) {
-      e.printStackTrace();
+    } catch (Exception e) {
     }
-    SwingUtilities.invokeLater(new Runnable() {
-      @Override
-      public void run() {
-        SwingUtilities.updateComponentTreeUI(MainScreen.getInstance());
+    SwingUtilities.invokeLater(() -> {
+      for (Window window : Window.getWindows()) {
+        SwingUtilities.updateComponentTreeUI(window);
       }
-      });
-    }
+    });
+  }
 
   public static LookFeel getInstance() {
     return instance;
