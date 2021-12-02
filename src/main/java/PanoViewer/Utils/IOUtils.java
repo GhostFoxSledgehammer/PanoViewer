@@ -40,7 +40,7 @@ public class IOUtils {
    *
    * @param file The file to be opened.
    *
-   * @return the opened image. returns null when file is invalid or an exception
+   * @return the opened image, or null when file is invalid or an exception
    * occurs.
    */
   public static BufferedImage loadImage(File file) {

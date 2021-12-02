@@ -29,12 +29,12 @@ public class MainScreen extends JFrame implements DropTargetListener {
     setJMenuBar(menuBar);
     jPanel = SwitchModes.getInstance();
     add(jPanel);
+    new DropTarget(this, this);
   }
 
-  public static void main(String args[]) {
-    MainScreen.getInstance();
-  }
-
+//  public static void main(String args[]) {
+//    MainScreen.getInstance();
+//  }
   @Override
   public void dragEnter(DropTargetDragEvent event) {
 
@@ -68,7 +68,7 @@ public class MainScreen extends JFrame implements DropTargetListener {
           List<File> files = (List<File>) transferable.getTransferData(df);
           displayImage(files.get(0));
         }
-      }catch (Exception e) {
+      } catch (Exception e) {
         e.printStackTrace();
       }
     }
@@ -76,6 +76,8 @@ public class MainScreen extends JFrame implements DropTargetListener {
 
   private void displayImage(File file) {
     BufferedImage image = IOUtils.loadImage(file);
-    SwitchModes.getInstance().setImage(image);
+    if (image != null) {
+      SwitchModes.getInstance().setImage(image);
+    }
   }
 }
