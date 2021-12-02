@@ -21,6 +21,7 @@ import PanoViewer.SwitchModes;
  * @author kshan
  */
 public class IOUtils {
+
   /*
    * Gets the image selected by the user and sets it on the SwitchMode panel.
    */
@@ -47,15 +48,18 @@ public class IOUtils {
     if (file == null) {
       return null;
     }
+
+    BufferedImage img;
     try {
-      BufferedImage img = ImageIO.read(file);
-      return img;
+      img = ImageIO.read(file);
     } catch (IOException e) {
-      JOptionPane.showMessageDialog(null, "Load Image <" + file.getName() + "> Failed!", "Error",
-          JOptionPane.ERROR_MESSAGE);
-      e.printStackTrace();
+      img = null;
     }
-    return null;
+    if (img == null) {
+      JOptionPane.showMessageDialog(null, "Load Image <" + file.getName() + "> Failed!", "Error",
+              JOptionPane.ERROR_MESSAGE);
+    }
+    return img;
   }
 
   /*
