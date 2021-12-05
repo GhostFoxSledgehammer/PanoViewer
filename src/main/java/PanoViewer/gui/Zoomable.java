@@ -24,7 +24,7 @@ public interface Zoomable {
   boolean isZoomEnabled();
 
   /**
-   * Zooms inwards if zoomBy is positive otherwise outwards.
+   * Zooms outwards if zoomBy is positive otherwise inwards.
    * @param zoomBy The amount to zoom by.
    */
   void zoom(float zoomBy);

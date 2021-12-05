@@ -11,7 +11,6 @@ import com.jogamp.opengl.util.texture.TextureData;
 import org.joml.Matrix4f;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
-import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
@@ -26,6 +25,7 @@ import static com.jogamp.opengl.GL.*;
  * Panoramic Panel which displays Panoramic Images
  *
  * @author Rohan Babbar
+ * @author kshan
  */
 public class PanoramicPanel extends JOGLImageViewer {
 
@@ -50,19 +50,19 @@ public class PanoramicPanel extends JOGLImageViewer {
   private TextureData textureData;
   private boolean updateImage;
   private static PanoramicPanel instance;
-  private boolean zoomEnable;
-  private boolean panningEnable;
-  private HandleMouseEvent event;
+  private boolean zoomEnabled;
+  private boolean panningEnabled;
+  private final HandleMouseEvent mouseListener;
 
   private PanoramicPanel() {
     camera = new Camera();
     sphereLoc = new Vector3f(0, 0, 0);
-    zoomEnable = true;
-    panningEnable = true;
-    event = new HandleMouseEvent();
-    addMouseListener(event);
-    addMouseMotionListener(event);
-    addMouseWheelListener(event);
+    zoomEnabled = true;
+    panningEnabled = true;
+    mouseListener = new HandleMouseEvent();
+    addMouseListener(mouseListener);
+    addMouseMotionListener(mouseListener);
+    addMouseWheelListener(mouseListener);
   }
 
   public static PanoramicPanel getInstance() {
@@ -83,17 +83,17 @@ public class PanoramicPanel extends JOGLImageViewer {
 
   @Override
   public boolean isPanningEnabled() {
-    return panningEnable;
+    return panningEnabled;
   }
 
   @Override
   public void enablePanning(boolean enable) {
     if (enable) {
-      addMouseMotionListener(event);
+      addMouseMotionListener(mouseListener);
     } else {
-      removeMouseMotionListener(event);
+      removeMouseMotionListener(mouseListener);
     }
-    this.panningEnable = enable;
+    this.panningEnabled = enable;
   }
 
   @Override
@@ -108,16 +108,16 @@ public class PanoramicPanel extends JOGLImageViewer {
   @Override
   public void enableZoom(boolean enable) {
     if (enable) {
-      addMouseWheelListener(event);
+      addMouseWheelListener(mouseListener);
     } else {
-      removeMouseWheelListener(event);
+      removeMouseWheelListener(mouseListener);
     }
-    this.zoomEnable = enable;
+    this.zoomEnabled = enable;
   }
 
   @Override
   public boolean isZoomEnabled() {
-    return zoomEnable;
+    return zoomEnabled;
   }
 
   @Override
@@ -140,7 +140,7 @@ public class PanoramicPanel extends JOGLImageViewer {
     texture = new Texture(GL_TEXTURE_2D);
   }
 
-  public void setupVertices(GL4 gl) {
+  private void setupVertices(GL4 gl) {
     Sphere sphere = new Sphere(getPrecision());
     numVerts = sphere.getIndices().length;
     int[] indices = sphere.getIndices();
@@ -190,6 +190,7 @@ public class PanoramicPanel extends JOGLImageViewer {
         gl.glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, max, 0);
         gl.glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, max[0]);
       }
+      updateImage = false;
     }
     gl.glClear(GL_DEPTH_BUFFER_BIT);
     gl.glClear(GL_COLOR_BUFFER_BIT);
