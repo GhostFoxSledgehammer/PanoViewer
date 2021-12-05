@@ -1,7 +1,12 @@
-package PanoViewer.ImagePanels;
+// License: GPL. For details, see LICENSE file.
+package PanoViewer.gui.jogl;
+
+import static PanoViewer.Settings.*;
+import static PanoViewer.Utils.joglUtils.createShaderProgram;
+import static PanoViewer.Utils.joglUtils.getTextureData;
+import static com.jogamp.opengl.GL.*;
 
 import PanoViewer.Camera;
-import PanoViewer.gui.JOGLImageViewer;
 import PanoViewer.math.Sphere;
 import com.jogamp.common.nio.Buffers;
 import com.jogamp.opengl.GL4;
@@ -16,10 +21,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.image.BufferedImage;
 import java.nio.FloatBuffer;
-import static PanoViewer.Settings.*;
-import static PanoViewer.Utils.joglUtils.createShaderProgram;
-import static PanoViewer.Utils.joglUtils.getTextureData;
-import static com.jogamp.opengl.GL.*;
 
 /**
  * Panoramic Panel which displays Panoramic Images

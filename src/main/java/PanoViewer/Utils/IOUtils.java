@@ -1,6 +1,4 @@
-/*
- *
- */
+// License: GPL. For details, see LICENSE file.
 package PanoViewer.Utils;
 
 import java.io.File;
@@ -22,6 +20,9 @@ import PanoViewer.SwitchModes;
  */
 public class IOUtils {
 
+   private IOUtils() {
+    // private constructor to prevent instantiation
+  }
   /*
    * Gets the image selected by the user and sets it on the SwitchMode panel.
    */

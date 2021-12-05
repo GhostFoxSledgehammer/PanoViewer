@@ -1,14 +1,15 @@
-package PanoViewer.ImagePanels;
+// License: GPL. For details, see LICENSE file.
+package PanoViewer.gui.jogl;
 
 import static PanoViewer.Settings.getWheelSensitivity;
-import PanoViewer.gui.JOGLImageViewer;
+import static PanoViewer.Utils.joglUtils.getTextureData;
+import static com.jogamp.opengl.GL.GL_TEXTURE_2D;
+
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLAutoDrawable;
 import com.jogamp.opengl.util.texture.Texture;
 import com.jogamp.opengl.util.texture.TextureData;
-import static PanoViewer.Utils.joglUtils.getTextureData;
-import static com.jogamp.opengl.GL.GL_TEXTURE_2D;
 import com.jogamp.opengl.util.texture.TextureCoords;
 import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;

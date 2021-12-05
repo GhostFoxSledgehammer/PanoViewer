@@ -1,3 +1,4 @@
+// License: GPL. For details, see LICENSE file.
 package PanoViewer.gui;
 
 import static PanoViewer.Utils.IOUtils.getFileFromResourceAsStream;
@@ -35,7 +36,7 @@ public class AboutDialog extends JPanel {
       e.printStackTrace();
     }
     try {
-      String repoLink = "https://github.com/opencodeiiita/PanoViewer";
+      String repoLink = "https://github.com/GhostFoxSledgehammer/PanoViewer";
       url = new URI(repoLink);
     } catch (URISyntaxException e) {
       e.printStackTrace();

@@ -1,3 +1,4 @@
+// License: GPL. For details, see LICENSE file.
 package PanoViewer.gui;
 
 import PanoViewer.MainScreen;
@@ -11,15 +12,17 @@ import javax.swing.*;
 
 public class Menu extends JMenuBar implements PropertyChangeListener {
 
-  private JMenu File;// creating menu objects
-  private JMenu Help;// creating menu objects
-  private JMenu options;// creating menu objects
-  private JMenuItem open, exit , settings;// creating menuitem objects
-  private JMenuItem About;// creating menu objects
-  private JMenu mode;
-  private JCheckBoxMenuItem flat;
-  private JCheckBoxMenuItem panoramic;
-  private ButtonGroup group = new ButtonGroup();
+  private final JMenu File;// creating menu objects
+  private final JMenu Help;// creating menu objects
+  private final JMenu options;// creating menu objects
+  private final JMenuItem open;
+  private final JMenuItem exit;// creating menuitem objects
+  private final JMenuItem settings;// creating menuitem objects
+  private final JMenuItem About;// creating menu objects
+  private final JMenu mode;
+  private final JCheckBoxMenuItem flat;
+  private final JCheckBoxMenuItem panoramic;
+  private final ButtonGroup group = new ButtonGroup();
   private static Menu instance;// creating a menu instance
 
   // private constructor for implementing singleton design principle

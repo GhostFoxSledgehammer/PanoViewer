@@ -1,6 +1,4 @@
-/*
- *
- */
+// License: GPL. For details, see LICENSE file.
 package PanoViewer.Utils;
 
 import static PanoViewer.Settings.invertImage;

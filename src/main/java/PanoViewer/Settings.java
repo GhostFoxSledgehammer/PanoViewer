@@ -1,6 +1,4 @@
-/*
- *
- */
+// License: GPL. For details, see LICENSE file.
 package PanoViewer;
 
 import com.jogamp.opengl.GLProfile;
@@ -13,7 +11,7 @@ public class Settings {
 
   private static float dragSensitivity = 1f;
   private static int wheelSensitivity = 5;
-  private static int precision = 180;
+  private static int precision = 360;//No of slices in spherical mesh.
   private static GLProfile gl;
   /* Whether or not to flip the image when creating texture data. */
   private static boolean invertImage;

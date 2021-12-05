@@ -1,8 +1,7 @@
-/*
- *
- */
-package PanoViewer.gui;
+// License: GPL. For details, see LICENSE file.
+package PanoViewer.gui.jogl;
 
+import PanoViewer.gui.ImageViewer;
 import com.jogamp.opengl.GLEventListener;
 import com.jogamp.opengl.awt.GLJPanel;
 

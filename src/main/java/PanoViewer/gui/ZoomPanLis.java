@@ -1,6 +1,4 @@
-/*
- *
- */
+// License: GPL. For details, see LICENSE file.
 package PanoViewer.gui;
 
 import static PanoViewer.Settings.*;

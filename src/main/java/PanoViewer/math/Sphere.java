@@ -1,6 +1,4 @@
-/*
- *
- */
+// License: GPL. For details, see LICENSE file.
 package PanoViewer.math;
 
 import static PanoViewer.Settings.invertImage;
@@ -48,8 +46,8 @@ public class Sphere {
         float z = (float) sin(j * sectorAngle) * (float) abs(sin(theta));
         vertices[i * (horizontalP + 1) + j].set(x, y, z);
         /*
-         * Horizontal inversion because images are viewed from inside. Vertical Inversion
-         * if texture image is not flipped.
+         * Horizontal inversion because images are viewed from inside. Vertical Inversion because
+         * diffrent conventions used by java image and opengl textures
          */
         x = 1 - (float) j / horizontalP;
         z = invertImage() ? ((float) i / verticalP) : (1 - (float) i / verticalP);

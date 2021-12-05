@@ -1,7 +1,8 @@
+// License: GPL. For details, see LICENSE file.
 package PanoViewer;
 
-import PanoViewer.ImagePanels.FlatPanel;
-import PanoViewer.ImagePanels.PanoramicPanel;
+import PanoViewer.gui.jogl.FlatPanel;
+import PanoViewer.gui.jogl.PanoramicPanel;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -11,18 +12,17 @@ import java.beans.PropertyChangeListener;
 import static PanoViewer.Utils.imageutils.isRatio;
 
 /**
- @author - Rohan Babbar
- Switching Modes between Flat and Panoramic Images
+ * JPanel to switch modes between Flat and Panoramic.
+ * @author - Rohan Babbar
 */
 
 public class SwitchModes extends JPanel implements PropertyChangeListener {
 
-  CardLayout cardLayout;
-  private FlatPanel flatPanel = FlatPanel.getInstance();
-  private PanoramicPanel panoramicPanel = PanoramicPanel.getInstance();
+  private final CardLayout cardLayout;
+  private final FlatPanel flatPanel;
+  private final PanoramicPanel panoramicPanel;
 
   private static SwitchModes instance;
-  private BufferedImage cache;
   public static SwitchModes getInstance() {
     if (instance == null) {
       instance = new SwitchModes();
@@ -31,11 +31,11 @@ public class SwitchModes extends JPanel implements PropertyChangeListener {
   }
 
   private SwitchModes() {
+    this.panoramicPanel = PanoramicPanel.getInstance();
+    this.flatPanel = FlatPanel.getInstance();
     ModeRecorder.getInstance().addPropertyChangeListener(this);
     setBounds(50,50,400,400);
     setLayout(new CardLayout());
-    FlatPanel flatPanel = FlatPanel.getInstance();
-    PanoramicPanel panoramicPanel = PanoramicPanel.getInstance();
     add(Mode.Flat.toString(),flatPanel);
     add(Mode.Panoramic.toString(),panoramicPanel);
     cardLayout = (CardLayout)getLayout();
@@ -48,7 +48,6 @@ public class SwitchModes extends JPanel implements PropertyChangeListener {
    * @param image the image to be set.
    */
   public void setImage(BufferedImage image) {
-    cache=image;
     flatPanel.setImage(image);
     panoramicPanel.setImage(image);
     if(isRatio(image))
