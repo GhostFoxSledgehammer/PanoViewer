@@ -1,7 +1,7 @@
 // License: GPL. For details, see LICENSE file.
-package PanoViewer.math;
+package org.panoviewer.math;
 
-import static PanoViewer.Settings.invertImage;
+import static org.panoviewer.Settings.invertImage;
 import static java.lang.Math.*;
 
 import org.joml.Vector2f;

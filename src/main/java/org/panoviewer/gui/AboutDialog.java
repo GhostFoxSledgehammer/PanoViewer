@@ -1,8 +1,8 @@
 // License: GPL. For details, see LICENSE file.
-package PanoViewer.gui;
+package org.panoviewer.gui;
 
-import static PanoViewer.Utils.IOUtils.getFileFromResourceAsStream;
-import static PanoViewer.Utils.imageutils.open;
+import static org.panoviewer.utils.IOUtils.getFileFromResourceAsStream;
+import static org.panoviewer.utils.imageutils.open;
 
 import java.awt.*;
 import java.io.IOException;

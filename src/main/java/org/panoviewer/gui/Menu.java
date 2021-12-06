@@ -1,10 +1,10 @@
 // License: GPL. For details, see LICENSE file.
-package PanoViewer.gui;
+package org.panoviewer.gui;
 
-import PanoViewer.MainScreen;
-import PanoViewer.Mode;
-import PanoViewer.ModeRecorder;
-import PanoViewer.Utils.IOUtils;
+import org.panoviewer.MainScreen;
+import org.panoviewer.Mode;
+import org.panoviewer.ModeRecorder;
+import org.panoviewer.utils.IOUtils;
 import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;

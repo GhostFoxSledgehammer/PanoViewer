@@ -1,13 +1,13 @@
 // License: GPL. For details, see LICENSE file.
-package PanoViewer.gui.jogl;
+package org.panoviewer.gui.jogl;
 
-import static PanoViewer.Settings.*;
-import static PanoViewer.Utils.joglUtils.createShaderProgram;
-import static PanoViewer.Utils.joglUtils.getTextureData;
+import static org.panoviewer.Settings.*;
+import static org.panoviewer.utils.joglUtils.createShaderProgram;
+import static org.panoviewer.utils.joglUtils.getTextureData;
 import static com.jogamp.opengl.GL.*;
 
-import PanoViewer.Camera;
-import PanoViewer.math.Sphere;
+import org.panoviewer.Camera;
+import org.panoviewer.math.Sphere;
 import com.jogamp.common.nio.Buffers;
 import com.jogamp.opengl.GL4;
 import com.jogamp.opengl.GLAutoDrawable;

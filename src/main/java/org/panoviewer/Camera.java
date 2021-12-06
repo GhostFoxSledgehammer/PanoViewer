@@ -1,5 +1,5 @@
 // License: GPL. For details, see LICENSE file.
-package PanoViewer;
+package org.panoviewer;
 
 import org.joml.Matrix4f;
 import org.joml.Vector3f;

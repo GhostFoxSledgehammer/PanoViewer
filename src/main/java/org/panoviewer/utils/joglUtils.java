@@ -1,9 +1,9 @@
 // License: GPL. For details, see LICENSE file.
-package PanoViewer.Utils;
+package org.panoviewer.utils;
 
-import static PanoViewer.Settings.invertImage;
-import static PanoViewer.Utils.IOUtils.getFileFromResourceAsStream;
-import static PanoViewer.Utils.imageutils.getFlipedImage;
+import static org.panoviewer.Settings.invertImage;
+import static org.panoviewer.utils.IOUtils.getFileFromResourceAsStream;
+import static org.panoviewer.utils.imageutils.getFlipedImage;
 import static com.jogamp.opengl.GL.GL_NO_ERROR;
 import static com.jogamp.opengl.GL2ES2.GL_COMPILE_STATUS;
 import static com.jogamp.opengl.GL2ES2.GL_FRAGMENT_SHADER;

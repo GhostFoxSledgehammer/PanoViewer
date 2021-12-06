@@ -1,8 +1,8 @@
 // License: GPL. For details, see LICENSE file.
-package PanoViewer;
+package org.panoviewer;
 
-import PanoViewer.Utils.IOUtils;
-import PanoViewer.gui.Menu;
+import org.panoviewer.utils.IOUtils;
+import org.panoviewer.gui.Menu;
 import javax.swing.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;

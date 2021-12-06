@@ -1,6 +1,6 @@
 // License: GPL. For details, see LICENSE file.
-package PanoViewer.gui;
-import PanoViewer.LookFeel;
+package org.panoviewer.gui;
+import org.panoviewer.LookFeel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,7 +17,7 @@ public class SettingsDialog extends JPanel {
   private JButton restore = new JButton("Restore");
   //private JButton ok = new JButton("OK");
 
-  private static PanoViewer.gui.SettingsDialog instance;
+  private static org.panoviewer.gui.SettingsDialog instance;
 
   public SettingsDialog() {
     tabbedPane.add("General Look", themesPanel);
@@ -78,7 +78,7 @@ public class SettingsDialog extends JPanel {
     this.setVisible(true);
   }
 
-  public static PanoViewer.gui.SettingsDialog getInstance() {
+  public static org.panoviewer.gui.SettingsDialog getInstance() {
     if (instance == null) {
       instance = new SettingsDialog(); //settings
     }

@@ -1,5 +1,5 @@
 // License: GPL. For details, see LICENSE file.
-package PanoViewer.Utils;
+package org.panoviewer.utils;
 
 import javax.swing.*;
 import java.awt.*;

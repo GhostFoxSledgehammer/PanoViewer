@@ -1,5 +1,5 @@
 // License: GPL. For details, see LICENSE file.
-package PanoViewer;
+package org.panoviewer;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -32,11 +32,8 @@ public class ModeRecorder {
         support.removePropertyChangeListener(ls);
     }
     /**
-     * @var-if mode md is Panoramic  then flag is false  else true hence a property change is propagated
+     * If mode is Panoramic  then flag is false else true hence a property change is propagated
      * @param  newMode -mode to be set
-     *
-     *
-     *
      */
     public void setCurrentMode(Mode newMode) {
         Mode oldMode = getCurrentMode();

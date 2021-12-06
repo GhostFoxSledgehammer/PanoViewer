@@ -1,5 +1,5 @@
 // License: GPL. For details, see LICENSE file.
-package PanoViewer.Utils;
+package org.panoviewer.utils;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,9 +10,9 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 import java.awt.image.BufferedImage;
-import PanoViewer.FileChooser;
-import PanoViewer.MainScreen;
-import PanoViewer.SwitchModes;
+import org.panoviewer.FileChooser;
+import org.panoviewer.MainScreen;
+import org.panoviewer.SwitchModes;
 
 /**
  *

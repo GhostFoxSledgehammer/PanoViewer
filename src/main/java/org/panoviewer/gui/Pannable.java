@@ -1,5 +1,5 @@
 // License: GPL. For details, see LICENSE file.
-package PanoViewer.gui;
+package org.panoviewer.gui;
 
 /**
  * Interface for panning.

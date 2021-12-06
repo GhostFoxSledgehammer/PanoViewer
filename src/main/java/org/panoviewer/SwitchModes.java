@@ -1,15 +1,15 @@
 // License: GPL. For details, see LICENSE file.
-package PanoViewer;
+package org.panoviewer;
 
-import PanoViewer.gui.jogl.FlatPanel;
-import PanoViewer.gui.jogl.PanoramicPanel;
+import org.panoviewer.gui.jogl.FlatPanel;
+import org.panoviewer.gui.jogl.PanoramicPanel;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import static PanoViewer.Utils.imageutils.isRatio;
+import static org.panoviewer.utils.imageutils.isRatio;
 
 /**
  * JPanel to switch modes between Flat and Panoramic.

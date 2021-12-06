@@ -1,8 +1,8 @@
 // License: GPL. For details, see LICENSE file.
-package PanoViewer.gui.jogl;
+package org.panoviewer.gui.jogl;
 
-import static PanoViewer.Settings.getWheelSensitivity;
-import static PanoViewer.Utils.joglUtils.getTextureData;
+import static org.panoviewer.Settings.getWheelSensitivity;
+import static org.panoviewer.utils.joglUtils.getTextureData;
 import static com.jogamp.opengl.GL.GL_TEXTURE_2D;
 
 import com.jogamp.opengl.GL;

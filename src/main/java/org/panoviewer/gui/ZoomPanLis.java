@@ -1,7 +1,7 @@
 // License: GPL. For details, see LICENSE file.
-package PanoViewer.gui;
+package org.panoviewer.gui;
 
-import static PanoViewer.Settings.*;
+import static org.panoviewer.Settings.*;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
