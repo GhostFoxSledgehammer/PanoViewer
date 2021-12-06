@@ -1,7 +1,6 @@
 // License: GPL. For details, see LICENSE file.
 package org.panoviewer.gui;
 
-import org.panoviewer.MainScreen;
 import org.panoviewer.Mode;
 import org.panoviewer.ModeRecorder;
 import org.panoviewer.utils.IOUtils;

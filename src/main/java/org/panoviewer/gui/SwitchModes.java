@@ -1,5 +1,5 @@
 // License: GPL. For details, see LICENSE file.
-package org.panoviewer;
+package org.panoviewer.gui;
 
 import org.panoviewer.gui.jogl.FlatPanel;
 import org.panoviewer.gui.jogl.PanoramicPanel;
@@ -8,6 +8,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import org.panoviewer.Mode;
+import org.panoviewer.ModeRecorder;
 
 import static org.panoviewer.utils.imageutils.isRatio;
 

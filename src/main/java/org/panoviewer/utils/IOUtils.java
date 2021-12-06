@@ -11,8 +11,8 @@ import javax.swing.JOptionPane;
 
 import java.awt.image.BufferedImage;
 import org.panoviewer.FileChooser;
-import org.panoviewer.MainScreen;
-import org.panoviewer.SwitchModes;
+import org.panoviewer.gui.MainScreen;
+import org.panoviewer.gui.SwitchModes;
 
 /**
  *

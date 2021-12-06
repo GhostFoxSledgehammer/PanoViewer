@@ -1,6 +1,8 @@
 // License: GPL. For details, see LICENSE file.
 package org.panoviewer;
 
+import org.panoviewer.gui.MainScreen;
+
 /**
  *
  * @author kshan

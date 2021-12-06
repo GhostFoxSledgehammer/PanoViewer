@@ -1,13 +1,14 @@
 // License: GPL. For details, see LICENSE file.
 package org.panoviewer;
 
-import junit.framework.TestCase;
+import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertTrue;
 import org.junit.Test;
 
 /**
  * Tests {@link Camera}
  */
-public class CameraTest extends TestCase {
+public class CameraTest {
 
   public CameraTest() {
   }

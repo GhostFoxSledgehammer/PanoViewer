@@ -7,7 +7,7 @@ apply plugin: 'jacoco'
 apply plugin: 'application'
 
 
-mainClassName = "PanoViewer.PanoViewer"
+mainClassName = "org.panoviewer.PanoViewer"
 
 configurations {
   // configuration that holds jars to include in the jar
