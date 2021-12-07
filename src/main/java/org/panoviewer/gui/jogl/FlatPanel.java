@@ -2,14 +2,11 @@
 package org.panoviewer.gui.jogl;
 
 import static org.panoviewer.Settings.getWheelSensitivity;
-import static org.panoviewer.utils.joglUtils.getTextureData;
-import static com.jogamp.opengl.GL.GL_TEXTURE_2D;
 
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLAutoDrawable;
 import com.jogamp.opengl.util.texture.Texture;
-import com.jogamp.opengl.util.texture.TextureData;
 import com.jogamp.opengl.util.texture.TextureCoords;
 import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
@@ -30,8 +27,6 @@ public class FlatPanel extends JOGLImageViewer {
   private boolean updateImage;
   private boolean panEnabled;
   private boolean zoomEnabled;
-  private TextureData textureData;
-  private Texture texture;
   private BufferedImage baseImage;
   private final float maxZoom = 5f;
   private final float minZoom = 1f;
@@ -55,8 +50,7 @@ public class FlatPanel extends JOGLImageViewer {
       return;
     }
     baseImage = image;
-    updateImage = true;
-    textureData = getTextureData(image);
+    visibleRect = new Rectangle(0, 0, image.getWidth(), image.getHeight());
     zoom = minZoom;
     repaint();
   }
@@ -146,14 +140,11 @@ public class FlatPanel extends JOGLImageViewer {
   public void init(GLAutoDrawable drawable) {
     GL2 gl = drawable.getGL().getGL2();
     gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
-    texture = new Texture(GL_TEXTURE_2D);
   }
 
   @Override
   public void dispose(GLAutoDrawable drawable) {
     GL2 gl = drawable.getGL().getGL2();
-    texture.disable(gl);
-    texture.destroy(gl);
   }
 
   @Override
@@ -161,15 +152,12 @@ public class FlatPanel extends JOGLImageViewer {
     if (baseImage == null) {
       return;
     }
+    Texture texture = TextureShare.getInstance().getTexture();
     Rectangle target;
     TextureCoords texCoords;
     GL2 gl;
     gl = drawable.getGL().getGL2();
     gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
-    if (updateImage) {
-      updateTexture(gl);
-      updateImage = false;
-    }
     texture.enable(gl);
     texture.bind(gl);
     texCoords = imageToTex(visibleRect, baseImage);
@@ -200,13 +188,6 @@ public class FlatPanel extends JOGLImageViewer {
       instance = new FlatPanel();
     }
     return instance;
-  }
-
-  private void updateTexture(GL2 gl) {
-    texture.updateImage(gl, textureData);
-    texture.enable(gl);
-    texture.bind(gl);
-    visibleRect = new Rectangle(0, 0, textureData.getWidth(), textureData.getHeight());
   }
 
   private Rectangle calculateDrawImageRectangle(Rectangle visibleRect) {

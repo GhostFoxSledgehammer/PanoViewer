@@ -1,6 +1,7 @@
 // License: GPL. For details, see LICENSE file.
 package org.panoviewer;
 
+import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLProfile;
 
 /**
@@ -13,14 +14,23 @@ public class Settings {
   private static int wheelSensitivity = 5;
   private static int precision = 360;//No of slices in spherical mesh.
   private static GLProfile gl;
+
+
   /* Whether or not to flip the image when creating texture data. */
   private static boolean invertImage;
+  private static GLCapabilities caps;
+
+  public static GLCapabilities getCaps() {
+    return caps;
+  }
 
   private Settings() {
+    //
   }
 
   static {
     gl = GLProfile.getMaxProgrammable(true);
+    caps = new GLCapabilities(gl);
   }
 
   public static void invertImage(boolean invert) {
@@ -31,7 +41,7 @@ public class Settings {
     return invertImage;
   }
 
-  static GLProfile getMaxProfile() {
+  public static GLProfile getGL() {
     return gl;
   }
 

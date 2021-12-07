@@ -4,6 +4,7 @@ package org.panoviewer.gui.jogl;
 import org.panoviewer.gui.ImageViewer;
 import com.jogamp.opengl.GLEventListener;
 import com.jogamp.opengl.awt.GLJPanel;
+import static org.panoviewer.Settings.getCaps;
 
 /**
  * JOGL based image viewer.
@@ -11,6 +12,8 @@ import com.jogamp.opengl.awt.GLJPanel;
  */
 public abstract class JOGLImageViewer extends GLJPanel implements GLEventListener, ImageViewer {
   public JOGLImageViewer() {
+    super(getCaps());
+    setSharedAutoDrawable(TextureShare.getInstance().getSharedDrawable());
     addGLEventListener(this);
   }
 }

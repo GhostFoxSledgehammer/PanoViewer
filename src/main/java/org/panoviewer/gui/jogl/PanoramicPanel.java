@@ -3,7 +3,6 @@ package org.panoviewer.gui.jogl;
 
 import static org.panoviewer.Settings.*;
 import static org.panoviewer.utils.joglUtils.createShaderProgram;
-import static org.panoviewer.utils.joglUtils.getTextureData;
 import static com.jogamp.opengl.GL.*;
 
 import org.panoviewer.Camera;
@@ -12,7 +11,6 @@ import com.jogamp.common.nio.Buffers;
 import com.jogamp.opengl.GL4;
 import com.jogamp.opengl.GLAutoDrawable;
 import com.jogamp.opengl.util.texture.Texture;
-import com.jogamp.opengl.util.texture.TextureData;
 import org.joml.Matrix4f;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
@@ -47,9 +45,6 @@ public class PanoramicPanel extends JOGLImageViewer {
   private static final int MAX_FOV = 110;
   private static final int MIN_FOV = 20;
   private static final int IDEAL_FOV = 90;
-  private Texture texture;
-  private TextureData textureData;
-  private boolean updateImage;
   private static PanoramicPanel instance;
   private boolean zoomEnabled;
   private boolean panningEnabled;
@@ -75,11 +70,9 @@ public class PanoramicPanel extends JOGLImageViewer {
 
   @Override
   public void setImage(BufferedImage image) {
-    textureData = getTextureData(image);
-    updateImage = true;
-    repaint();
     camera.reset();
     fov = IDEAL_FOV;
+    repaint();
   }
 
   @Override
@@ -138,7 +131,6 @@ public class PanoramicPanel extends JOGLImageViewer {
     pMat.setPerspective((float) Math.toRadians(fov), aspect, 0.1f, 1000.0f);
     vMat.set(camera.getViewMatrix());
     mMat.translation(sphereLoc);
-    texture = new Texture(GL_TEXTURE_2D);
   }
 
   private void setupVertices(GL4 gl) {
@@ -178,21 +170,12 @@ public class PanoramicPanel extends JOGLImageViewer {
     gl.glDeleteProgram(rendering_program);
     gl.glDeleteVertexArrays(vao.length, vao, 0);
     gl.glDeleteBuffers(vbo.length, vbo, 0);
-    texture.destroy(gl);
   }
 
   @Override
   public void display(GLAutoDrawable glad) {
+    Texture texture = TextureShare.getInstance().getTexture();
     GL4 gl = glad.getGL().getGL4();
-    if (updateImage) {
-      texture.updateImage(gl, textureData);
-      if (gl.isExtensionAvailable("GL_EXT_texture_filter_anisotropic")) {
-        float max[] = new float[1];
-        gl.glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, max, 0);
-        gl.glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, max[0]);
-      }
-      updateImage = false;
-    }
     gl.glClear(GL_DEPTH_BUFFER_BIT);
     gl.glClear(GL_COLOR_BUFFER_BIT);
     gl.glUseProgram(rendering_program);
