@@ -24,10 +24,9 @@ public class FlatPanel extends JOGLImageViewer {
 
   private static FlatPanel instance;
 
-  private boolean updateImage;
   private boolean panEnabled;
   private boolean zoomEnabled;
-  private BufferedImage baseImage;
+  private Rectangle imageRect;
   private final float maxZoom = 5f;
   private final float minZoom = 1f;
   private float zoom = 1f;
@@ -49,7 +48,7 @@ public class FlatPanel extends JOGLImageViewer {
     if (image == null) {
       return;
     }
-    baseImage = image;
+    imageRect = new Rectangle(0,0,image.getWidth(), image.getHeight());
     visibleRect = new Rectangle(0, 0, image.getWidth(), image.getHeight());
     zoom = minZoom;
     repaint();
@@ -71,10 +70,10 @@ public class FlatPanel extends JOGLImageViewer {
       return;
     }
     Rectangle rect;
-    BufferedImage image;
+    Rectangle image;
     synchronized (this) {
       rect = this.visibleRect;
-      image = this.baseImage;
+      image = this.imageRect;
     }
     rect.x += panX * image.getWidth() / (getWidth() * zoom);
     rect.y += panY * image.getWidth() / (getWidth() * zoom);
@@ -101,10 +100,10 @@ public class FlatPanel extends JOGLImageViewer {
       return;
     }
     Rectangle rect;
-    BufferedImage image;
+    Rectangle image;
     synchronized (this) {
       rect = this.visibleRect;
-      image = this.baseImage;
+      image = this.imageRect;
     }
     if (zoomBy < 0) {
       zoom = zoom * 1.1f;
@@ -114,8 +113,8 @@ public class FlatPanel extends JOGLImageViewer {
     zoom = Math.min(zoom, maxZoom);
     zoom = Math.max(zoom, minZoom);
     float[] center = new float[]{rect.x + (rect.width / 2), rect.y + (rect.height / 2)};
-    float width = image.getWidth() / zoom;
-    float height = image.getHeight() / zoom;
+    float width = image.width / zoom;
+    float height = image.height / zoom;
     // Set the same ratio for the visible rectangle and the display area
     float hFact = height * getSize().width;
     float wFact = width * getSize().height;
@@ -149,7 +148,7 @@ public class FlatPanel extends JOGLImageViewer {
 
   @Override
   public void display(GLAutoDrawable drawable) {
-    if (baseImage == null) {
+    if (imageRect == null) {
       return;
     }
     Texture texture = TextureShare.getInstance().getTexture();
@@ -160,7 +159,7 @@ public class FlatPanel extends JOGLImageViewer {
     gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
     texture.enable(gl);
     texture.bind(gl);
-    texCoords = imageToTex(visibleRect, baseImage);
+    texCoords = imageToTex(visibleRect, imageRect);
     target = calculateDrawImageRectangle(visibleRect);
     float[] scaledCoords = componentToOpengl(target);
     gl.glBegin(GL2.GL_QUADS);
@@ -226,9 +225,9 @@ public class FlatPanel extends JOGLImageViewer {
    * @param baseImage the original image
    * @return the rectangle in texture coordinates
    */
-  private TextureCoords imageToTex(Rectangle imageCoords, BufferedImage baseImage) {
-    float w = baseImage.getWidth();
-    float h = baseImage.getHeight();
+  private TextureCoords imageToTex(Rectangle imageCoords, Rectangle baseImage) {
+    float w = baseImage.width;
+    float h = baseImage.height;
     return new TextureCoords((1f * imageCoords.x) / w,
             (h - imageCoords.y) / h,
             (1f * imageCoords.x + imageCoords.width) / w,
@@ -252,7 +251,7 @@ public class FlatPanel extends JOGLImageViewer {
    * @param image The original image.
    * @param visibleRect The visible part of the image.
    */
-  public static void checkVisibleRectPos(BufferedImage image, Rectangle visibleRect) {
+  public static void checkVisibleRectPos(Rectangle image, Rectangle visibleRect) {
     if (visibleRect.x < 0) {
       visibleRect.x = 0;
     }
@@ -260,10 +259,10 @@ public class FlatPanel extends JOGLImageViewer {
       visibleRect.y = 0;
     }
     if (visibleRect.x + visibleRect.width > image.getWidth()) {
-      visibleRect.x = image.getWidth() - visibleRect.width;
+      visibleRect.x = image.width - visibleRect.width;
     }
     if (visibleRect.y + visibleRect.height > image.getHeight()) {
-      visibleRect.y = image.getHeight() - visibleRect.height;
+      visibleRect.y = image.height - visibleRect.height;
     }
   }
 
@@ -272,12 +271,12 @@ public class FlatPanel extends JOGLImageViewer {
    * @param image The original image.
    * @param visibleRect The visible part of the image.
    */
-  private static void checkVisibleRectSize(BufferedImage image, Rectangle visibleRect) {
-    if (visibleRect.width > image.getWidth(null)) {
-      visibleRect.width = image.getWidth(null);
+  private static void checkVisibleRectSize(Rectangle imageRect, Rectangle visibleRect) {
+    if (visibleRect.width > imageRect.getWidth()) {
+      visibleRect.width = imageRect.width;
     }
-    if (visibleRect.height > image.getHeight(null)) {
-      visibleRect.height = image.getHeight(null);
+    if (visibleRect.height > imageRect.getHeight()) {
+      visibleRect.height = imageRect.height;
     }
   }
 
